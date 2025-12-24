@@ -1,0 +1,68 @@
+// LOCATION: prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  // url is REMOVED from here
+}
+
+model Session {
+  id          String    @id
+  shop        String
+  state       String
+  isOnline    Boolean   @default(false)
+  scope       String?
+  expires     DateTime?
+  accessToken String
+  userId      BigInt?
+}
+
+// --- NICHEDROP CORE ---
+
+model Shop {
+  id            String   @id @default(uuid())
+  shopDomain    String   @unique
+  
+  // Dual Mode Flags
+  isSupplier    Boolean  @default(false)
+  isRetailer    Boolean  @default(true)
+  
+  // The "Vibe" (AI Generated)
+  nicheCategory String?
+  
+  // Credits
+  tokens        Int      @default(5)
+  
+  negotiationsAsRetailer Negotiation[] @relation("RetailerNegotiations")
+  negotiationsAsSupplier Negotiation[] @relation("SupplierNegotiations")
+}
+
+model Negotiation {
+  id          String   @id @default(uuid())
+  
+  retailerId  String
+  retailer    Shop     @relation("RetailerNegotiations", fields: [retailerId], references: [id])
+  
+  supplierId  String
+  supplier    Shop     @relation("SupplierNegotiations", fields: [supplierId], references: [id])
+  
+  status      String
+  turnCount   Int      @default(0)
+  
+  messages    Message[]
+  createdAt   DateTime @default(now())
+}
+
+model Message {
+  id            String   @id @default(uuid())
+  negotiationId String
+  negotiation   Negotiation @relation(fields: [negotiationId], references: [id])
+  
+  sender        String
+  content       String
+  isAiDraft     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
