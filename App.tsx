@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import AppLayout from './components/AppLayout';
 import Dashboard from './components/Dashboard';
 import Feed from './components/Feed';
+import WarRoom from './components/WarRoom';
 
 /**
  * Enterprise Application Entry
@@ -17,6 +18,8 @@ const App: React.FC = () => {
         return <Dashboard />;
       case 'feed':
         return <Feed />;
+      case 'war-room':
+        return <WarRoom />;
       default:
         return (
           <div className="flex flex-col items-center justify-center h-[60vh] text-center">

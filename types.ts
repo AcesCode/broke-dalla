@@ -51,3 +51,11 @@ export interface Opportunity {
   shipping: string;
   hypeReason: string;
 }
+
+export interface ChatMessage {
+  id: string;
+  sender: 'user-ai' | 'supplier-ai';
+  text: string;
+  timestamp: string;
+  type?: 'offer' | 'counter' | 'info';
+}

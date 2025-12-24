@@ -7,13 +7,15 @@ import {
   Handshake,
   Coins,
   TrendingUp,
-  BarChart3
+  BarChart3,
+  ShieldAlert
 } from 'lucide-react';
-import { NavItem, UserProfile, MatchActivity, StatCardData, Opportunity } from './types';
+import { NavItem, UserProfile, MatchActivity, StatCardData, Opportunity, ChatMessage } from './types';
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/dashboard' },
   { id: 'feed', label: 'Opportunity Feed', icon: Search, path: '/feed' },
+  { id: 'war-room', label: 'War Room', icon: ShieldAlert, path: '/war-room' },
   { id: 'pipes', label: 'Active Pipes', icon: Activity, path: '/pipes' },
   { id: 'settings', label: 'Settings', icon: Settings, path: '/settings' },
 ];
@@ -82,30 +84,48 @@ export const OPPORTUNITIES: Opportunity[] = [
     margin: '45%',
     shipping: 'Europe',
     hypeReason: 'Eco-conscious Surge'
+  }
+];
+
+export const MOCK_CHAT_HISTORY: ChatMessage[] = [
+  {
+    id: 'c1',
+    sender: 'user-ai',
+    text: "Initial inquiry initiated. Seeking 500 units of 'Handmade Ceramic Mugs' for Q3 distribution. Target unit price: $14.50.",
+    timestamp: '14:20:01',
+    type: 'info'
   },
   {
-    id: 'o5',
-    title: 'Smart Garden Irrigation Kits',
-    imageUrl: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=400',
-    matchScore: 87,
-    margin: '38%',
-    shipping: 'USA',
-    hypeReason: 'Seasonal Opportunity'
+    id: 'c2',
+    sender: 'supplier-ai',
+    text: "Acknowledgement. Current warehouse availability is verified. Wholesale baseline for 500 units is $18.25 due to artisan labor constraints.",
+    timestamp: '14:20:05',
+    type: 'offer'
   },
   {
-    id: 'o6',
-    title: 'Minimalist Vegan Leather Totes',
-    imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=400',
-    matchScore: 84,
-    margin: '60%',
-    shipping: 'Vietnam',
-    hypeReason: 'High Margin Potential'
+    id: 'c3',
+    sender: 'user-ai',
+    text: "Counter-parameter applied. Based on historical data for this niche, $18.25 exceeds market ceiling. Proposing $15.75 with guaranteed logistics exclusivity for 12 months.",
+    timestamp: '14:21:12',
+    type: 'counter'
+  },
+  {
+    id: 'c4',
+    sender: 'supplier-ai',
+    text: "Evaluating logistics tradeoff... The 12-month exclusivity adds node value. Revised offer: $16.80 per unit, 30% upfront deposit required.",
+    timestamp: '14:22:30',
+    type: 'counter'
+  },
+  {
+    id: 'c5',
+    sender: 'user-ai',
+    text: "Optimizing for budget constraints. Final push: $16.20 per unit. Exclusivity remains. Net-30 payment terms.",
+    timestamp: '14:23:45',
+    type: 'counter'
   }
 ];
 
 export const SUPPLIER_MATCHES: MatchActivity[] = [
   { id: 's1', partner: 'RetailGiant Co', niche: 'Volume Distribution', matchScore: 99, status: 'active', timestamp: '1h ago', value: '$140,000' },
   { id: 's2', partner: 'Boutique Finds', niche: 'Niche Markets', matchScore: 96, status: 'active', timestamp: '3h ago', value: '$12,500' },
-  { id: 's3', partner: 'Swift Mart', niche: 'Fast-Moving Goods', matchScore: 92, status: 'pending', timestamp: '6h ago', value: '$34,000' },
-  { id: 's4', partner: 'Urban Supply', niche: 'Metropolitan Retail', matchScore: 88, status: 'completed', timestamp: '1d ago', value: '$67,000' },
 ];
